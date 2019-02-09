@@ -6,9 +6,9 @@ class App extends Component {
 
   state = {
     persons: [
-      { name: 'Matus', age: '25' },
-      { name: 'John', age: '17' },
-      { name: 'Emma', age: '21' }
+      { id:'sdas0', name: 'Matus', age: '25' },
+      { id:'sdas1', name: 'John', age: '17' },
+      { id:'sdas2', name: 'Emma', age: '21' }
     ],
     otherState: 'some other walue',
     showPersons:false
@@ -27,14 +27,15 @@ class App extends Component {
   }
 
   deletePersonHandler=(personIndex)=>{
-    const persons = this.state.persons;
+   // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
     persons.splice(personIndex,1);
     this.setState({persons:persons});
 
   }
 
   togglePersonsHandler=()=>{
-      const doesShow= this.state.showPersons.slice();
+      const doesShow= this.state.showPersons;
       this.setState({showPersons: !doesShow});
   }
 
@@ -57,6 +58,7 @@ class App extends Component {
 
           {this.state.persons.map((person, index) => {
             return ( <Person
+              key={person.id}
               name={person.name}
               age={person.age} 
               click={()=>this.deletePersonHandler(index)}
